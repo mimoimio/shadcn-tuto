@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 
 // Import the recipe data directly
 const recipes = [
@@ -44,11 +43,9 @@ const recipes = [
   }
 ];
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   // Optional: Add a small delay to simulate network latency in development
-  if (process.env.NODE_ENV === 'development') {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-  }
-  
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
   return NextResponse.json(recipes);
 }
