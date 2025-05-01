@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
+import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
 import { Skeleton } from "./ui/skeleton"
 
 export default function SkeletonCard() {

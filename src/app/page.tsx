@@ -1,6 +1,6 @@
-import { Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent } from "@/components/ui/card";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Badge, badgeVariants } from "@/components/ui/badge";
+import { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 interface Recipe {
