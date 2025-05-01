@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 interface Recipe {
-  image: string;
+  image?: string;
   title: string;
   time: number;
   description: string;
@@ -13,9 +13,22 @@ interface Recipe {
 }
 
 async function getRecipes(): Promise<Recipe[]> {
-  const result = await fetch("http://localhost:4000/recipes");
-  await new Promise((resolve) => setTimeout(resolve, 200));
-  return result.json();
+  // Use relative URL to call our internal API route
+  const url = process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000/api/recipes' // For development
+    : 'https://' + process.env.VERCEL_URL + '/api/recipes'; // For production on Vercel
+
+  try {
+    const result = await fetch(url, {
+      // This ensures the data is cached at build time in production
+      cache: process.env.NODE_ENV === 'production' ? 'force-cache' : 'no-store'
+    });
+
+    return result.json();
+  } catch (error) {
+    console.error('Failed to fetch recipes:', error);
+    return []; // Return empty array as fallback
+  }
 }
 
 export default async function Home() {
@@ -42,7 +55,7 @@ export default async function Home() {
               <p>{recipe.description}</p>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button >View Recipt</Button>
+              <Button>View Recipe</Button>
               {recipe.vegan && <Badge variant="secondary">Vegan</Badge>}
             </CardFooter>
           </Card>
@@ -51,3 +64,7 @@ export default async function Home() {
     </main>
   );
 }
+
+
+
+

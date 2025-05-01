@@ -1,0 +1,54 @@
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+// Import the recipe data directly
+const recipes = [
+  {
+    "id": "1",
+    "title": "Veggie Carbonara",
+    "image": "veggie_carbonara.jpg",
+    "time": 20,
+    "description": "A healthy and flavorful twist on the classic Italian dish.",
+    "vegan": false
+  },
+  {
+    "id": "2",
+    "title": "Mushroom Risotto",
+    "image": "mushroom_risotto.jpg",
+    "time": 30,
+    "description": "Creamy and comforting, perfect for a cozy night in.",
+    "vegan": false
+  },
+  {
+    "id": "3",
+    "title": "Quinoa Salad",
+    "image": "quinoa_salad.jpg",
+    "time": 15,
+    "description": "Light and refreshing, ideal for a warm summer day.",
+    "vegan": true
+  },
+  {
+    "id": "4",
+    "title": "Lentil Soup",
+    "image": "lentil_soup.webp",
+    "time": 45,
+    "description": "Warm and hearty, perfect for a chilly evening.",
+    "vegan": true
+  },
+  {
+    "id": "5",
+    "title": "Tofu Stir-Fry",
+    "time": 25,
+    "description": "A quick and easy vegan meal packed with flavor.",
+    "vegan": true
+  }
+];
+
+export async function GET(request: NextRequest) {
+  // Optional: Add a small delay to simulate network latency in development
+  if (process.env.NODE_ENV === 'development') {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+  
+  return NextResponse.json(recipes);
+}
